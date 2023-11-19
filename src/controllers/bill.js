@@ -73,32 +73,11 @@ export const createBill = async function (req, res) {
 
         const orderedItems = req.body.items.map(async (item) => {
             const product = await Product.findById(item._id);
-            let sizeFound = false;
-            for (const size of product.sizes) {
-                if (size.size === item.size) {
-                    sizeFound = true;
-                    if (size.quantity < item.quantity) {
-                        return res.status(404).json({
-                            message: "Sản phẩm không đủ số lượng để bán",
-                        });
-                    }
-                    size.quantity -= item.quantity;
-                    if (size.quantity === 0) {
-                        product.sizes = product.sizes.filter((s) => s.size !== size.size);
-                    }
-                    break;
-                }
-            }
-            if (!sizeFound) {
-                return res.status(404).json({
-                    message: "Sản phẩm không có size này để bán",
-                });
-            }
             product.quantity -= item.quantity;
             await product.save();
             return {
                 name: product.name,
-                size: item.size,
+               
                 quantity: item.quantity,
                 price: item.price,
                 image: item.image
@@ -145,7 +124,7 @@ export const createBill = async function (req, res) {
                     <li style="margin-bottom: 20px; padding: 20px; background-color: #f9f9f9; border-radius: 10px;">
                         <img src="${item.image}" alt="" style="max-width: 100%; height: auto;"/>
                         <h3 style="margin-top: 0;">${item.name}</h3>
-                        <p style="margin-bottom: 5px;">Size: ${item.size}</p>
+                  
                         <p style="margin-bottom: 5px;">Số lượng: ${item.quantity}</p>
                         <p style="margin-bottom: 0;">Đơn giá: ${item.price}</p>
                     </li>

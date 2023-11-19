@@ -4,7 +4,7 @@ const itemSchema = joi.object({
     image: joi.string().required(),
     name: joi.string().required(),
     price: joi.number().required(),
-    size: joi.number().required(),
+ 
     quantity: joi.number().required(),
 });
 const BillSchema = joi.object({

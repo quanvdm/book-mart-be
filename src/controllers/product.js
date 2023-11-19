@@ -51,21 +51,8 @@ export const FilterProductByPrice = async (req, res) => {
     }
 };
 
-// filter products by size
-export const FilterProductBySize = async (req, res) => {
-    try {
-        const { size } = req.params;
-        const filteredProducts = await Product.find({ size: size });
-        return res.status(200).json({
-            message: 'Lọc sản phẩm thành công',
-            data: filteredProducts,
-        });
-    } catch (error) {
-        return res.status(500).json({
-            message: error.message,
-        });
-    }
-};
+
+
 
 // filter products on sale price
 export const FilterProductBySalePrice = async (req, res) => {

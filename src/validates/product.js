@@ -1,8 +1,4 @@
 import joi from "joi";
-const sizesSchema = joi.object({
-    size: joi.number().required(),
-    quantity: joi.number().required(),
-});
 const ProductSchema = joi.object({
     name: joi.string().required().messages({
         "string.empty": 'Trường tên không được để trống',
@@ -16,7 +12,7 @@ const ProductSchema = joi.object({
         "string.empty": 'Trường images không được để trống',
         "any.required": 'Trường images là bắt buộc',
     }),
-    sizes: joi.array().items(sizesSchema).required(),
+   
     description: joi.string().required().messages({ 
         "string.empty": 'Trường description không được để trống',
         "any.required": 'Trường description là bắt buộc',
