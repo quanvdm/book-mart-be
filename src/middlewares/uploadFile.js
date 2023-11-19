@@ -20,7 +20,6 @@ router.post('/upload', upload.array('images'), async (req, res) => {
     salePrice: req.body.salePrice,
     images: images.map(image => image.url),
     description: req.body.description,
-    sizes: req.body.sizes,
     tags: req.body.tags,
     CategoryId: req.body.CategoryId
   });
